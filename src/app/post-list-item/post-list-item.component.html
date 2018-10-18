@@ -1,0 +1,17 @@
+<li [ngClass]="{'list-group-item': true,
+                'list-group-item-success': post.loveIts > 0,
+                'list-group-item-danger': post.loveIts < 0}">
+  <div class="row">
+    <div class="col-xs-9">{{post.title}}</div><div class="col-xs-3">{{ post.created_at | date:'dd/MM/yyyy, HH:mm' }}</div>
+
+    <div class="col-xs-12">{{post.content}}</div>
+
+    <div class="col-xs-12">
+      <button class="btn btn-success" (click)="onlove(true)">Love It</button>
+      <button class="btn btn-danger" (click)="onlove(false)">Don't Love It</button>
+    </div>
+  </div>
+
+  <!--<h4 [ngStyle]="{color: getColor()}" >Appareil : {{ appareilName }} -- statut : {{ getStatus() }}</h4>
+  <input type="text" class="form-control" [(ngModel)]="appareilName">-->
+</li>
