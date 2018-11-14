@@ -1,5 +1,6 @@
-<app-post-list-item-component  *ngFor="let itemPost of listPosts"
+<app-post-list-item-component  *ngFor="let itemPost of listPosts; let i = index"
                           [post]="itemPost"
+                          [index]="i"
                           >
 
 </app-post-list-item-component>

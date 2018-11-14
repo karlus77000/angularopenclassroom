@@ -1,5 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {PostsService} from '../services/posts.service'
 import {Post} from '../post';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-post-list-item-component',
@@ -17,13 +20,28 @@ export class PostListItemComponent implements OnInit {
   @Input() createdAt : Date;*/
 
   @Input() post : Post;
+  postsSubscription: Subscription;
+  @Input() index: number;
+  //posts : Post[];
 
 
-  constructor() { }
+  constructor(private postsService:PostsService) { }
 
   ngOnInit() {
+    this.postsSubscription = this.postsService.postsSubject.subscribe(
+      (posts: Post[]) => {        
+      }
+    );
   }
 
+
+  ngOnDestroy() {
+    this.postsSubscription.unsubscribe();
+  }
+
+  onDeletePost(){
+    this.postsService.removePost(this.post);
+  }
 
   onlove(love : boolean) {
    if(love){
@@ -31,7 +49,14 @@ export class PostListItemComponent implements OnInit {
    }else{
      this.post.loveIts--;
    }
+   this.postsService.savePosts();
+   this.postsService.emitPostsSubject()
+
   }
+
+
+
+
 
 
 }

@@ -1,31 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Post} from './post';
+import {PostsService} from './services/posts.service';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'excercice1';
 
+  listPosts : Post[];
 
-  listPosts = [
-    new Post('Mon premier Post',
-    'lorem ipsum ...',
-    5,
-    new Date()),
 
-    new Post('Mon deuxième Post',
-      'lorem ipsum 2...',
-      -2,
-      new Date()),
+  constructor(){
+     // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCPgu2M71PtyjG4HQjs7ydqFjbM4LscIFA",
+    authDomain: "exo2ocr.firebaseapp.com",
+    databaseURL: "https://exo2ocr.firebaseio.com",
+    projectId: "exo2ocr",
+    storageBucket: "exo2ocr.appspot.com",
+    messagingSenderId: "11324757723"
+  };
+  firebase.initializeApp(config);
 
-    new Post('Mon troisieme post',
-      'lorem ipsum 3...',
-      5,
-      new Date())
-  ];
+  }
+
+  
+  ngOnInit() {
+      //this.listPosts = this.postsService.;
+  }
+  
 
 
 }
